@@ -1,4 +1,6 @@
 
+import 'package:app_chungkhoan_thuctap/data/cophieu.dart';
+
 import 'chungkhoanlistmain.dart';
 import 'package:flutter/material.dart' show BuildContext, Column, Expanded, ListView, MainAxisAlignment, SizedBox, StatelessWidget, Text, Widget;
 
@@ -16,10 +18,21 @@ class  ThiTruong extends StatelessWidget {
                   
                   height: 570,
                   child: ListView.builder(
-                      itemCount: 20,
-                      itemBuilder: (context, index) {
-                        return const LayOutChungKhoan();
-                      }),
+                    itemCount: coPhieus.length,
+                  
+                  itemBuilder: (context, index) {
+                    final chungkhoan = coPhieus[index];
+                    return  LayOutChungKhoan(
+                        tencongty: chungkhoan['name'] as String,
+                        tencophieu: chungkhoan['type'] as String,
+                        san: chungkhoan['san'] as String,
+                        tanggiam: chungkhoan['tanggiam'] as double,
+                        khoiluongGD: chungkhoan['khoiluongGD'] as double,
+                        tangphantr: chungkhoan['tang'] as double,
+                        gia: chungkhoan['gia'] as double,
+
+                    );}
+                      ),
                 ),
       ],
     );
@@ -41,10 +54,20 @@ class  ThiTruong2 extends StatelessWidget {
                   
                   height: 570,
                   child: ListView.builder(
-                      itemCount: 20,
-                      itemBuilder: (context, index) {
-                        return const LayOutChungKhoan();
-                      }),
+                       itemCount: coPhieus.length,
+                  
+                    itemBuilder: (context, index) {
+                    final chungkhoan = coPhieus[index];
+                    return  LayOutChungKhoan(
+                        tencongty: chungkhoan['name'] as String,
+                        tencophieu: chungkhoan['type'] as String,
+                        san: chungkhoan['san'] as String,
+                        tanggiam: chungkhoan['tanggiam'] as double,
+                        khoiluongGD: chungkhoan['khoiluongGD'] as double,
+                        tangphantr: chungkhoan['tang'] as double,
+                        gia: chungkhoan['gia'] as double,
+
+                    );}),
                 ),
       ],
     );
@@ -65,10 +88,20 @@ class  ThiTruong3 extends StatelessWidget {
                   
                   height: 570,
                   child: ListView.builder(
-                      itemCount: 20,
-                      itemBuilder: (context, index) {
-                        return const LayOutChungKhoan();
-                      }),
+                       itemCount: coPhieus.length,
+                  
+                    itemBuilder: (context, index) {
+                    final chungkhoan = coPhieus[index];
+                    return  LayOutChungKhoan(
+                        tencongty: chungkhoan['name'] as String,
+                        tencophieu: chungkhoan['type'] as String,
+                        san: chungkhoan['san'] as String,
+                        tanggiam: chungkhoan['tanggiam'] as double,
+                        khoiluongGD: chungkhoan['khoiluongGD'] as double,
+                        tangphantr: chungkhoan['tang'] as double,
+                        gia: chungkhoan['gia'] as double,
+
+                    );}),
                 ),
       ],
     );
@@ -89,10 +122,21 @@ class  ThiTruong4 extends StatelessWidget {
                   
                   height: 570,
                   child: ListView.builder(
-                      itemCount: 20,
-                      itemBuilder: (context, index) {
-                        return const LayOutChungKhoan();
-                      }),
+                      itemCount: coPhieus.length,
+                  
+                    itemBuilder: (context, index) {
+                    final chungkhoan = coPhieus[index];
+                    return  LayOutChungKhoan(
+                        tencongty: chungkhoan['name'] as String,
+                        tencophieu: chungkhoan['type'] as String,
+                        san: chungkhoan['san'] as String,
+                        tanggiam: chungkhoan['tanggiam'] as double,
+                        khoiluongGD: chungkhoan['khoiluongGD'] as double,
+                        tangphantr: chungkhoan['tang'] as double,
+                        gia: chungkhoan['gia'] as double,
+
+                    );}
+                    ),
                 ),
       ],
     );
