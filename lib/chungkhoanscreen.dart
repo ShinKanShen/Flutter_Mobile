@@ -23,12 +23,17 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen>  {
    bool? buttonAZ =false;
    bool? buttonGia =false;
    bool? buttonKhoiLuong = false;
+
+  
   
   @override
   void initState() {
+    
     cophieusort .addAll(coPhieus.toList());
     super.initState();
   }
+
+
 
     @override
   Widget build(BuildContext context) {
@@ -488,7 +493,7 @@ Widget listview (List? cophieu){
 
 }
 
-// Fuction button 
+
 
 
 

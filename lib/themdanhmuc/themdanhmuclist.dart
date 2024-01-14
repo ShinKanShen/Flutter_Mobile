@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ThemDanhMucList extends StatelessWidget {
-  const ThemDanhMucList({super.key});
+  final String tencp;
+  final String tenCongty;
+  final String tenSan;
+
+  const ThemDanhMucList({
+    required this.tenCongty,
+    required this.tencp,
+    required this.tenSan,
+    super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,30 +21,33 @@ class ThemDanhMucList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             
             children: [
-              const Column(
+               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:[
                   IntrinsicHeight(
                     child: Row(children: [
-                       Text("VIX", style: TextStyle(
+                       Text(tencp.toString().toUpperCase(), 
+                       style: const TextStyle(
                         fontSize: 16, fontWeight: FontWeight.bold
                       ),
                       
                       ),
-                      VerticalDivider(
+                      const VerticalDivider(
                         width: 6,
                         thickness: 0.5,
                         indent: 6,
                         endIndent: 6,
                       ),
-                      Text("Hose", style: TextStyle(
+                      Text(tenSan.toUpperCase(),
+                       style: const TextStyle(
                         fontSize: 16, fontWeight: FontWeight.w400,
                         color: Colors.black,
                       ),)
                     ],),
                   ),
           
-                  Text("CHung Khan VIX", style: TextStyle(
+                  Text(tenCongty, 
+                  style: const  TextStyle(
                     color: Color.fromRGBO(0, 0, 0, 0.4),
                   ),)
           

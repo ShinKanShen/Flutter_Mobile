@@ -1,6 +1,11 @@
+
+
 import 'package:app_chungkhoan_thuctap/chungkhoanscreen.dart';
+import 'package:app_chungkhoan_thuctap/data/cophieu.dart';
+import 'package:app_chungkhoan_thuctap/data/danhmuc_data.dart';
 import 'package:app_chungkhoan_thuctap/themdanhmuc/themdanhmuclist.dart';
 import 'package:flutter/material.dart';
+import 'package:quickalert/quickalert.dart';
 
 class  ThemDanhMuc extends StatefulWidget {
   const ThemDanhMuc ({super.key});
@@ -10,6 +15,20 @@ class  ThemDanhMuc extends StatefulWidget {
   
 }
 class _ThemDanhMuc extends State<ThemDanhMuc>{
+  final TextEditingController _textEditingController = TextEditingController();
+  
+  
+// show alert 
+  void showAlert(QuickAlertType type, String title, String text){
+    QuickAlert.show(
+      context: context, 
+      type: type,
+      title: title,
+      text: text
+      );
+
+  }
+
   @override
     Widget build(BuildContext context) {
     return 
@@ -42,7 +61,12 @@ class _ThemDanhMuc extends State<ThemDanhMuc>{
           child: Column(
             children:  [
                TextField(
+                controller: _textEditingController,
                 decoration: InputDecoration(
+                  suffixIcon: IconButton(onPressed: (){
+                    _textEditingController.clear();
+                  }
+                  , icon: const  Icon(Icons.clear)),
                   filled: true,
                   enabledBorder: InputBorder.none,
                   hintText: "Ten danh muc",
@@ -63,7 +87,29 @@ class _ThemDanhMuc extends State<ThemDanhMuc>{
                 height: 16,
               ),
               ElevatedButton(
-                onPressed: (){},
+                onPressed: (){
+
+                  if((danhmucs.where((element) => element['name']==_textEditingController.text)).isNotEmpty){
+                      showAlert(QuickAlertType.error,'Thong bao', 'Ten danh muc da ton tai');
+                  }else{
+                      setState(() {
+                      danhmucs.add(
+                        {
+                          'id':danhmucs.length.toString(),
+                          'name': _textEditingController.text.toString()
+                        }
+                      );
+                       _textEditingController.clear();
+                      
+                    });
+
+                    showAlert(QuickAlertType.success, "Chuc Mung ", "Them danh muc thanh cong!");
+
+                  }
+
+                    
+
+                },
                 style: ElevatedButton.styleFrom(
                   
                   minimumSize:const  Size.fromHeight(50),
@@ -99,13 +145,17 @@ class _ThemDanhMuc extends State<ThemDanhMuc>{
                     color: Colors.black,
                   ),
                 Expanded(child: ListView.builder(
-                  itemCount: 15,
-                  itemBuilder:(context, index)=>const  ThemDanhMucList() ))
-          
-               
-                 
-                
-          
+                  itemCount: coPhieus.length,
+                  itemBuilder:(context, index){
+                    final themcp = coPhieus[index];
+                    return ThemDanhMucList(
+                        tenCongty: themcp['name'] as String,
+                        tencp: themcp['type'] as String ,
+                        tenSan: themcp['san'] as String,
+
+                    ) ;
+                  }))
+
             ],
           ),
         ),
@@ -115,3 +165,6 @@ class _ThemDanhMuc extends State<ThemDanhMuc>{
     
   }
   }
+
+
+ 

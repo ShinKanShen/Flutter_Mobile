@@ -1,4 +1,4 @@
-final danhmucs =[
+var danhmucs =[
   {
     'id': '0',
     'name': 'Xem Nhanh 1'
