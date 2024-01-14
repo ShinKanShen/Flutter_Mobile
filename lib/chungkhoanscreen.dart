@@ -1,13 +1,36 @@
 import 'package:app_chungkhoan_thuctap/chondanhmuc/chondanhmuc.dart';
 import 'package:app_chungkhoan_thuctap/chungkhoanlistmain.dart';
+import 'package:app_chungkhoan_thuctap/data/cophieu.dart';
 import 'package:app_chungkhoan_thuctap/themdanhmuc/themdanhmucscreen.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 
-class ChungKhoanScreen extends StatelessWidget {
-  const ChungKhoanScreen({super.key});
+class ChungKhoanScreen extends StatefulWidget {
+
+ 
+  const ChungKhoanScreen({ super.key});
+
+
   @override
+  _chungkhoanScreenState createState() => _chungkhoanScreenState();
+
+ }
+
+class _chungkhoanScreenState extends State<ChungKhoanScreen>  {
+
+   List cophieusort= [];
+   bool? buttonAZ =false;
+   bool? buttonGia =false;
+   bool? buttonKhoiLuong = false;
+  
+  @override
+  void initState() {
+    cophieusort .addAll(coPhieus.toList());
+    super.initState();
+  }
+
+    @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -182,7 +205,7 @@ class ChungKhoanScreen extends StatelessWidget {
                             // an navigation
                             useRootNavigator: true,
                             backgroundColor:
-                                const Color.fromARGB(255, 218, 184, 244),
+                               const  Color.fromARGB(255, 255, 255, 255),
                             shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.vertical(
                               top: Radius.circular(20),
@@ -296,19 +319,27 @@ class ChungKhoanScreen extends StatelessWidget {
                 children: [
                   // nut A-z
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        cophieusort = sapxepfunction('name', coPhieus);
+                        buttonAZ = true;  
+                        buttonGia = false;
+                        buttonKhoiLuong = false;                 
+                      });
+                      
+                    },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.only(
                           left: 6, top: 12, bottom: 12, right: 5),
                       fixedSize: const Size.fromHeight(32),
-                      backgroundColor: const Color.fromRGBO(40, 60, 145, 1),
+                      backgroundColor: buttonAZ!? const Color.fromRGBO(40, 60, 145, 1): Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4),
                       ),
                     ),
-                    child: const Text(
+                    child:  Text(
                       "A-Z",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: buttonAZ!?Colors.white :const  Color.fromRGBO(0, 0, 0, 0.4)),
                     ),
                   ),
                   const SizedBox(
@@ -316,30 +347,37 @@ class ChungKhoanScreen extends StatelessWidget {
                   ),
                   // Button Gia
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        cophieusort = sapxepfunction('gia', coPhieus);
+                        buttonGia = true;
+                        buttonAZ = false;
+                        buttonKhoiLuong = false;
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.only(
                           left: 6, top: 12, bottom: 12, right: 5),
                       fixedSize: const Size.fromHeight(32),
-                      backgroundColor: Colors.white,
+                      backgroundColor:  buttonGia!? const Color.fromRGBO(40, 60, 145, 1): Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4),
                       ),
                     ),
-                    child: const Row(
+                    child:  Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           "Gia",
                           style: TextStyle(
-                            color: Color.fromRGBO(0, 0, 0, 0.4),
+                            color: buttonGia!?Colors.white :const  Color.fromRGBO(0, 0, 0, 0.4),
                             fontSize: 14,
                           ),
                         ),
-                        Icon(
+                         Icon(
                           Icons.arrow_drop_down_sharp,
                           size: 20,
-                          color: Color.fromRGBO(0, 0, 0, 0.4),
+                          color: buttonGia!?Colors.white :const  Color.fromRGBO(0, 0, 0, 0.4),
                         )
                       ],
                     ),
@@ -349,29 +387,36 @@ class ChungKhoanScreen extends StatelessWidget {
                   ),
                   // Button Khoi Luong
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        cophieusort = sapxepfunction('khoiluong', coPhieus);
+                        buttonKhoiLuong = true;
+                        buttonAZ = false;
+                        buttonGia = false;
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.only(
                           left: 6, top: 12, bottom: 12, right: 5),
                       fixedSize: const Size.fromHeight(32),
-                      backgroundColor: Colors.white,
+                      backgroundColor:  buttonKhoiLuong!? const Color.fromRGBO(40, 60, 145, 1): Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4),
                       ),
                     ),
-                    child: const Row(
+                    child:  Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           "Khoi Luong",
                           style: TextStyle(
-                            color: Color.fromRGBO(0, 0, 0, 0.4),
+                            color: buttonKhoiLuong!?Colors.white :const  Color.fromRGBO(0, 0, 0, 0.4),
                           ),
                         ),
                         Icon(
                           Icons.arrow_drop_down_sharp,
                           size: 20,
-                          color: Color.fromRGBO(0, 0, 0, 0.4),
+                          color: buttonKhoiLuong!?Colors.white :const  Color.fromRGBO(0, 0, 0, 0.4),
                         ),
                       ],
                     ),
@@ -380,14 +425,9 @@ class ChungKhoanScreen extends StatelessWidget {
               ),
             ),
             // phan hien thi gia chung khoan
-            Expanded(
-              child: ListView.builder(
-                  itemCount: 20,
-                  itemBuilder: (context, index) {
-                    return const LayOutChungKhoan();
-                  }),
-            ),
-
+            
+            listview(cophieusort),
+            
             //  const Expanded(
             //     child:  BotttomMenu())
           ],
@@ -395,9 +435,62 @@ class ChungKhoanScreen extends StatelessWidget {
       ),
     );
   }
-  // bottom sheet for chon danh muc
 
-  // cho chức năng them sưa xoa
+}
+// chon danh muc
+Widget builderSheet() => const ChonDanhMuc();
+
+// sap xep
+List<Map<String, dynamic>>  sapxepfunction(String chucnang, List<Map<String, dynamic>>? cophieu){
+  
+  List<Map<String, dynamic>> cophieusort =[]; 
+  
+  
+  
+  switch(chucnang){
+    case 'name': cophieu!.sort((a,b)=> (a['name']).compareTo(b['name']));
+    case 'gia': cophieu!.sort((a,b)=> (a['gia']).compareTo(b['gia']));
+    case 'khoiluong': cophieu!.sort((a,b)=> (a['khoiluongGD']).compareTo(b['khoiluongGD']));
+    default :  break;
+
+
+  }
+  cophieusort.addAll(cophieu!.toList());
+
+  
+  return cophieusort ;
+
 }
 
-Widget builderSheet() => const ChonDanhMuc();
+// widget listView 
+
+Widget listview (List? cophieu){
+
+  return Expanded(
+              child: ListView.builder(
+                  itemCount: cophieu!.length,
+                  
+                  itemBuilder: (context, index) {
+                    final chungkhoan = cophieu[index];
+                    return  LayOutChungKhoan(
+                        tencongty: chungkhoan['name'] as String,
+                        tencophieu: chungkhoan['type'] as String,
+                        san: chungkhoan['san'] as String,
+                        tanggiam: chungkhoan['tanggiam'] as double,
+                        khoiluongGD: chungkhoan['khoiluongGD'] as double,
+                        tangphantr: chungkhoan['tang'] as double,
+                        gia: chungkhoan['gia'] as double,
+
+                    );
+                  }),
+            );
+
+
+}
+
+// Fuction button 
+
+
+
+
+

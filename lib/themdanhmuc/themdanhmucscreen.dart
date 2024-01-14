@@ -23,14 +23,19 @@ class _ThemDanhMuc extends State<ThemDanhMuc>{
             onPressed: (){
               Navigator.push(
                 context,
-              
                MaterialPageRoute(builder: (context)=> const ChungKhoanScreen())
                
                );
               
 
             },
-            child: const Icon(Icons.arrow_back_ios),) 
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white,
+              elevation: 0, 
+            ),
+            child: const Icon(Icons.arrow_back_ios),
+            
+            ) 
         ),
         body:  Container(
           margin: const EdgeInsets.only(left: 16, right: 16),
