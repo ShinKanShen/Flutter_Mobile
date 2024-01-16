@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class LayOutChungKhoan extends StatelessWidget {
-  
   final String tencophieu;
   final String tencongty;
   final String san;
@@ -10,30 +9,23 @@ class LayOutChungKhoan extends StatelessWidget {
   final double tanggiam;
   final double tangphantr;
 
-  
-  
-  const LayOutChungKhoan({
-    required this.tencophieu,
-    required this.tencongty,
-    
-    required this.gia,
-    required this.san,
-    required this.khoiluongGD,
-    required this.tanggiam,
-    required this.tangphantr,
-    
-    super.key});
-
-
+  const LayOutChungKhoan(
+      {required this.tencophieu,
+      required this.tencongty,
+      required this.gia,
+      required this.san,
+      required this.khoiluongGD,
+      required this.tanggiam,
+      required this.tangphantr,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(left: 4, right: 16),
-      child:  Column(
+      child: Column(
         children: [
           Row(
-            
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +39,7 @@ class LayOutChungKhoan extends StatelessWidget {
                               fontSize: 16, fontWeight: FontWeight.w500),
                         ),
                         // gach doc
-                       const  VerticalDivider(
+                        const VerticalDivider(
                           indent: 6,
                           endIndent: 6,
                           color: Color.fromRGBO(230, 230, 230, 1),
@@ -71,69 +63,69 @@ class LayOutChungKhoan extends StatelessWidget {
               const Spacer(),
               //  cot 2
               Container(
-                width: 90,
+                width: 80,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    
                     Text(
                       gia.toString(),
-                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                     Text(
                       khoiluongGD.toString(),
-                      style: const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4)),
+                      style:
+                          const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4)),
                     ),
                   ],
                 ),
               ),
               // cot 2
               Container(
-                width: 90,
+                width: 80,
                 child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                
-                setTextgia(tanggiam),
-                Text(
-                  "$tangphantr%",
-                  style: const TextStyle(
-                    color:  Color.fromRGBO(35, 134, 25, 1),
-                  ),
-                )
-                                ],
-                              ),
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    setTextgia(tanggiam),
+                    Text(
+                      "$tangphantr%",
+                      style: const TextStyle(
+                        color: Color.fromRGBO(35, 134, 25, 1),
+                      ),
+                    )
+                  ],
+                ),
               ),
-              
-              
-             
             ],
           ),
           const Divider(
-                thickness: 2,
-                height: 20,
-                color:  Color.fromRGBO(0, 0, 0, 0.4),
-                ),
+            thickness: 2,
+            height: 20,
+            color: Color.fromRGBO(0, 0, 0, 0.4),
+          ),
         ],
       ),
     );
   }
 }
 
-Widget setTextgia(double giaphantram){
-  String text='';
-  Color textColor ;
-  if(giaphantram<0){
-    text= giaphantram.toString();
+Widget setTextgia(double giaphantram) {
+  String text = '';
+  Color textColor;
+  if (giaphantram < 0) {
+    text = giaphantram.toString();
     textColor = Colors.red;
   } else {
-    text ='+${giaphantram.toString()}';
+    text = '+${giaphantram.toString()}';
     textColor = const Color.fromRGBO(35, 134, 25, 1);
   }
 
-  return Text(text, style:  TextStyle(
-    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: textColor,
-  ),);
+  return Text(
+    text,
+    style: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+      color: textColor,
+    ),
+  );
 }

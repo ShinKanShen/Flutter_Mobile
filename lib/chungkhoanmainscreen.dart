@@ -1,6 +1,7 @@
 import 'package:app_chungkhoan_thuctap/chondanhmuc/chondanhmuc.dart';
-import 'package:app_chungkhoan_thuctap/chungkhoanlistmain.dart';
+import 'package:app_chungkhoan_thuctap/listchungkhoanmain.dart';
 import 'package:app_chungkhoan_thuctap/data/cophieu.dart';
+import 'package:app_chungkhoan_thuctap/suaxoadanhmuc/suaxoadanhmuc.dart';
 import 'package:app_chungkhoan_thuctap/themdanhmuc/themdanhmucscreen.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -120,7 +121,10 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen>  {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 const ThemDanhMuc()));
+                                    
+                                    
                                   },
+                                  
                                   child: const Padding(
                                     padding: EdgeInsets.all(16),
                                     child: Text(
@@ -135,7 +139,14 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen>  {
                             Container(
                                 color: Colors.white,
                                 child: CupertinoActionSheetAction(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const SuaDanhMuc()));
+                                    
+                                  },
                                   child: const Padding(
                                     padding: EdgeInsets.all(16),
                                     child: Text(
@@ -150,11 +161,18 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen>  {
                             Container(
                                 color: Colors.white,
                                 child: CupertinoActionSheetAction(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const SuaDanhMuc()));
+
+                                  },
                                   child: const Padding(
                                     padding: EdgeInsets.all(16),
                                     child: Text(
-                                      "Chinh Sua Danh Muc",
+                                      "Xoa Danh Muc",
                                       style: TextStyle(
                                         fontSize: 18,
                                         color: Color.fromRGBO(209, 51, 56, 1),

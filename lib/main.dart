@@ -1,7 +1,7 @@
 import 'package:app_chungkhoan_thuctap/screens.dart';
 import 'package:app_chungkhoan_thuctap/themdanhmuc/themdanhmucscreen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:app_chungkhoan_thuctap/chungkhoanscreen.dart';
+import 'package:app_chungkhoan_thuctap/chungkhoanmainscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
