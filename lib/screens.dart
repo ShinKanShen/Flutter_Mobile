@@ -1,7 +1,7 @@
 
 import 'package:app_chungkhoan_thuctap/data/cophieu.dart';
 
-import 'chungkhoanlistmain.dart';
+import 'listchungkhoanmain.dart';
 import 'package:flutter/material.dart' show BuildContext, Column, Expanded, ListView, MainAxisAlignment, SizedBox, StatelessWidget, Text, Widget;
 
 

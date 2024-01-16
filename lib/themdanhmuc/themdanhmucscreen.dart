@@ -1,6 +1,6 @@
 
 
-import 'package:app_chungkhoan_thuctap/chungkhoanscreen.dart';
+import 'package:app_chungkhoan_thuctap/chungkhoanmainscreen.dart';
 import 'package:app_chungkhoan_thuctap/data/cophieu.dart';
 import 'package:app_chungkhoan_thuctap/data/danhmuc_data.dart';
 import 'package:app_chungkhoan_thuctap/themdanhmuc/themdanhmuclist.dart';
@@ -91,6 +91,7 @@ class _ThemDanhMuc extends State<ThemDanhMuc>{
 
                   if((danhmucs.where((element) => element['name']==_textEditingController.text)).isNotEmpty){
                       showAlert(QuickAlertType.error,'Thong bao', 'Ten danh muc da ton tai');
+                      print(danhmucs.where((element) => element['name']==_textEditingController.text));
                   }else{
                       setState(() {
                       danhmucs.add(
@@ -128,13 +129,17 @@ class _ThemDanhMuc extends State<ThemDanhMuc>{
                const  SizedBox(
                   height: 8,
                 ),
-                const TextField(
+                 TextField(
                   decoration:  InputDecoration(
                       hintText: "Ban dang tim kiem gi",
-                      hintStyle: TextStyle(
+                      suffixIcon: IconButton(onPressed: (){
+                    _textEditingController.clear();
+                  }
+                  , icon: const  Icon(Icons.clear)),
+                      hintStyle: const TextStyle(
                         color: Color.fromRGBO(0, 0, 0, 0.4)
                       ),
-                      prefixIcon: Icon(Icons.filter_vintage),
+                      prefixIcon:const  Icon(Icons.filter_vintage),
                       enabledBorder: InputBorder.none
                       )
                       
@@ -155,7 +160,6 @@ class _ThemDanhMuc extends State<ThemDanhMuc>{
 
                     ) ;
                   }))
-
             ],
           ),
         ),
