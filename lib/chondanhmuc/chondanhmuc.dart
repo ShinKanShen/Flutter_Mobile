@@ -17,7 +17,7 @@ class ChonDanhMuc extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             const Text(
-              "Chon Danh Muc",
+              "Chọn danh mục",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -46,7 +46,7 @@ class ChonDanhMuc extends StatelessWidget {
           decoration: InputDecoration(
             filled: true,
             fillColor: const Color.fromRGBO(238, 238, 238, 1),
-            hintText: "Tim Kiem",
+            hintText: "Tìm Kiếm",
             hintStyle: const TextStyle(
               color: Color.fromRGBO(0, 0, 0, 0.4),
               fontSize: 16,

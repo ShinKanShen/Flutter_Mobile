@@ -5,7 +5,7 @@ class LayOutChungKhoan extends StatelessWidget {
   final String tencongty;
   final String san;
   final double gia;
-  final double khoiluongGD;
+  final int khoiluongGD;
   final double tanggiam;
   final double tangphantr;
 
@@ -99,7 +99,7 @@ class LayOutChungKhoan extends StatelessWidget {
             ],
           ),
           const Divider(
-            thickness: 2,
+            thickness: 0.3,
             height: 20,
             color: Color.fromRGBO(0, 0, 0, 0.4),
           ),

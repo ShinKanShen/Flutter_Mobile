@@ -1,14 +1,18 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 class ThemDanhMucList extends StatelessWidget {
   final String tencp;
   final String tenCongty;
   final String tenSan;
+  final int isSave;
 
   const ThemDanhMucList({
     required this.tenCongty,
     required this.tencp,
     required this.tenSan,
+    required this.isSave,
     super.key});
 
   @override
@@ -57,13 +61,21 @@ class ThemDanhMucList extends StatelessWidget {
           
                 IconButton(
                   onPressed: (){}, 
+                  style: ElevatedButton.styleFrom(
+                    
+                  ),
                 
-                icon: const Icon(Icons.star_border_rounded))
                 
+                icon:    Icon(Icons.star,
+                color:  (isSave>0)? Colors.white: const Color.fromARGB(255, 225, 182, 30),
+                 
+                  
+                )
+                )
                 ]
               ),
               const Divider(
-                thickness: 0.8,
+                thickness: 0.3,
                 height: 16,
               )
         ],

@@ -1,11 +1,15 @@
 import 'package:app_chungkhoan_thuctap/screens.dart';
 import 'package:app_chungkhoan_thuctap/themdanhmuc/themdanhmucscreen.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:app_chungkhoan_thuctap/chungkhoanmainscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent
+  ));
   runApp(const MyApp());
 }
 
@@ -41,61 +45,84 @@ class BottomNav extends StatelessWidget {
          const ThemDanhMuc()
       ];
     }
+    PersistentBottomNavBarItem getNavBarItem(
+        {required String iconSvgPath, String? title, }) {
+      return PersistentBottomNavBarItem(
+        icon: SvgPicture.asset(iconSvgPath),
+
+        title: title,
+        activeColorPrimary: const Color(0xff2A5CAA),
+        inactiveColorPrimary: const Color(0xff000000).withOpacity(0.7),
+
+      );
+    }
+    _buildIconNotification(context, Color color) {
+      return Stack(
+        children: [
+          SvgPicture.asset("assets/images/svg/menu-notification.svg",
+              color: color),
+          Positioned(
+            right: 0,
+            child: Container(
+              padding: const EdgeInsets.all(1),
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(6),
+              ),
+              constraints: const BoxConstraints(
+                minWidth: 12,
+                minHeight: 12,
+              ),
+              child: const Text(
+                '9',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 8,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          )
+        ],
+      );
+    }
 
     List<PersistentBottomNavBarItem> _navBarsItems() {
       return [
         PersistentBottomNavBarItem(
-          icon: const Icon(
-            Icons.home,
-            size: 24,
-          ),
-          title: "Thị trường",
-          activeColorPrimary: const Color.fromRGBO(40, 60, 145, 1),
-          inactiveColorPrimary: const Color.fromRGBO(20, 0, 0, 0.7),
+          icon: SvgPicture.asset('assets/images/svg/Frame_1.svg'),
+          title: ("Home"),
+          activeColorPrimary:Colors.black ,
+          inactiveColorPrimary: Colors.black ,
         ),
-       PersistentBottomNavBarItem(
-          icon: const Icon(
-            Icons.sell,
-            size: 24,
-          ),
-          title: "Bảng Giá",
-          activeColorPrimary: const Color.fromRGBO(40, 60, 145, 1),
-          inactiveColorPrimary: const Color.fromRGBO(20, 0, 0, 0.7),
+
+        getNavBarItem(
+          iconSvgPath: "assets/images/svg/menu-priceboard.svg",
+          title: "Bảng giá",
         ),
-        PersistentBottomNavBarItem(
-          icon: const Icon(
-            Icons.tornado_rounded,
-            size: 24,
-          ),
+        getNavBarItem(
+          iconSvgPath: "assets/images/svg/menu-transaction.svg",
           title: "Giao dịch",
-          activeColorPrimary: const Color.fromRGBO(40, 60, 145, 1),
-          inactiveColorPrimary: const Color.fromRGBO(20, 0, 0, 0.7),
+          //onPressed: onPlaceOrderPressed
+        ),
+        getNavBarItem(
+          iconSvgPath: "assets/images/svg/menu-search.svg",
+          title: "Tìm kiếm",
+          // onPressed: null,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(
-          Icons.find_in_page_outlined,
-          size: 24,
-                    ),
-          title: "Tìm Kiếm",
-          activeColorPrimary: const Color.fromRGBO(40, 60, 145, 1),
-          inactiveColorPrimary: const Color.fromRGBO(20, 0, 0, 0.7),
-        ),
-        PersistentBottomNavBarItem(
-
-          icon: SvgPicture.asset('assets/icons/gia.svg',
-          width: 50, height: 50,
-          placeholderBuilder: (BuildContext context)=> Container(
-            padding: const EdgeInsets.all(2),
-          ),
-          ),
-
+          icon: _buildIconNotification(context, const Color(0xff2A5CAA)),
+          inactiveIcon: _buildIconNotification(
+              context, const Color(0xff000000).withOpacity(0.7)),
           title: "Thông báo",
-
-          activeColorPrimary: const Color.fromRGBO(40, 60, 145, 1),
-          inactiveColorPrimary: const Color.fromRGBO(20, 0, 0, 0.7),
+          activeColorPrimary: const Color(0xff2A5CAA),
+          inactiveColorPrimary: const Color(0xff000000).withOpacity(0.7),
         ),
+
       ];
     }
+
+
 
     //
     PersistentTabController _controller;
@@ -108,6 +135,7 @@ class BottomNav extends StatelessWidget {
       screens: _buildScreens(),
       items: _navBarsItems(),
       confineInSafeArea: true,
+      
       backgroundColor: Colors.white, // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
       resizeToAvoidBottomInset:
@@ -132,6 +160,7 @@ class BottomNav extends StatelessWidget {
         curve: Curves.ease,
         duration: Duration(milliseconds: 200),
       ),
+      navBarHeight: 67,
       navBarStyle:
           NavBarStyle.style3, // Choose the nav bar style with this property.
     );

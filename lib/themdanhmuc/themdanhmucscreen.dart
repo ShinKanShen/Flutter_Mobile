@@ -16,6 +16,17 @@ class  ThemDanhMuc extends StatefulWidget {
 }
 class _ThemDanhMuc extends State<ThemDanhMuc>{
   final TextEditingController _textEditingController = TextEditingController();
+
+  List saveList = [];
+  @override
+  void initState() {
+    
+    
+    super.initState();
+    sapxepfunction('isSaved',coPhieus);
+    print(coPhieus);
+  }
+
   
   
 // show alert 
@@ -35,7 +46,7 @@ class _ThemDanhMuc extends State<ThemDanhMuc>{
       Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text("Them Danh Muc Moi", style: TextStyle(
+          title: const Text("Thêm Danh mục mới", style: TextStyle(
             fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromRGBO(0, 0, 0, 1),
           ),),
           leading: ElevatedButton(
@@ -69,7 +80,7 @@ class _ThemDanhMuc extends State<ThemDanhMuc>{
                   , icon: const  Icon(Icons.clear)),
                   filled: true,
                   enabledBorder: InputBorder.none,
-                  hintText: "Ten danh muc",
+                  hintText: "Tên danh mục",
                   hintStyle: const  TextStyle(
                     color:   Color.fromRGBO(0, 0, 0, 0.4)
                   ),
@@ -90,7 +101,7 @@ class _ThemDanhMuc extends State<ThemDanhMuc>{
                 onPressed: (){
 
                   if((danhmucs.where((element) => element['name']==_textEditingController.text)).isNotEmpty){
-                      showAlert(QuickAlertType.error,'Thong bao', 'Ten danh muc da ton tai');
+                      showAlert(QuickAlertType.error,'Thông báo', 'Tên danh mục đã tồn tại');
                       print(danhmucs.where((element) => element['name']==_textEditingController.text));
                   }else{
                       setState(() {
@@ -104,7 +115,7 @@ class _ThemDanhMuc extends State<ThemDanhMuc>{
                       
                     });
 
-                    showAlert(QuickAlertType.success, "Chuc Mung ", "Them danh muc thanh cong!");
+                    showAlert(QuickAlertType.success, "Chúc Mừng", "Thêm danh mục thành công!");
 
                   }
 
@@ -120,7 +131,7 @@ class _ThemDanhMuc extends State<ThemDanhMuc>{
                     borderRadius: BorderRadius.circular(0)
                   )
                 ),
-                child: const Text("Xac Nhan", style: TextStyle(
+                child: const Text("Xác Nhận", style: TextStyle(
                   color: Colors.white, 
                   fontSize: 16
                 ),
@@ -131,7 +142,7 @@ class _ThemDanhMuc extends State<ThemDanhMuc>{
                 ),
                  TextField(
                   decoration:  InputDecoration(
-                      hintText: "Ban dang tim kiem gi",
+                      hintText: "Bạn đang tìm kiếm gì",
                       suffixIcon: IconButton(onPressed: (){
                     _textEditingController.clear();
                   }
@@ -157,6 +168,7 @@ class _ThemDanhMuc extends State<ThemDanhMuc>{
                         tenCongty: themcp['name'] as String,
                         tencp: themcp['type'] as String ,
                         tenSan: themcp['san'] as String,
+                        isSave: themcp['isSaved'] as int, 
 
                     ) ;
                   }))

@@ -7,7 +7,8 @@ final coPhieus = [
     'gia': 27.38,
     'tanggiam': 0.33,
     'khoiluongGD':10000000.0,
-    'tang': 26.66
+    'tang': 26.66,
+    'isSaved':1,
   },
   {
     'id':'1',
@@ -17,7 +18,8 @@ final coPhieus = [
     'gia': 21.0,
     'tanggiam': -0.2,
     'khoiluongGD':12000000.0,
-    'tang': 24.66
+    'tang': 24.66,
+    'isSaved':1,
   },
   {
     'id':'2',
@@ -27,7 +29,8 @@ final coPhieus = [
     'gia': 13.0,
     'tanggiam': -0.12,
     'khoiluongGD':50000.0,
-    'tang': 26.66
+    'tang': 26.66,
+    'isSaved':0,
   },
   {
     'id':'3',
@@ -37,7 +40,8 @@ final coPhieus = [
     'gia': 45.0,
     'tanggiam': -0.5,
     'khoiluongGD':789000.0,
-    'tang': 26.66
+    'tang': 26.66,
+    'isSaved':0,
   },
   {
     'id':'4',
@@ -47,7 +51,8 @@ final coPhieus = [
     'gia': 26.12,
     'tanggiam': 0.12,
     'khoiluongGD':45600.0,
-    'tang': 26.66
+    'tang': 26.66,
+    'isSaved':0,
   },
   {
     'id':'5',
@@ -57,7 +62,8 @@ final coPhieus = [
     'gia': 34.2,
     'tanggiam': 0.03,
     'khoiluongGD':1000.0,
-    'tang': 26.66
+    'tang': 26.66,
+    'isSaved':0,
   },
   {
     'id':'6',
@@ -67,7 +73,8 @@ final coPhieus = [
     'gia': 33.234,
     'tanggiam': -0.9,
     'khoiluongGD':400000.0,
-    'tang': 26.66
+    'tang': 26.66,
+    'isSaved':1,
   },
   {
     'id':'7',
@@ -77,7 +84,8 @@ final coPhieus = [
     'gia': 2.34,
     'tanggiam': 0.34,
     'khoiluongGD':11000000.23,
-    'tang': 26.66
+    'tang': 26.66,
+    'isSaved':0,
   },
   {
     'id':'8',
@@ -87,7 +95,8 @@ final coPhieus = [
     'gia': 5.34,
     'tanggiam': 0.123,
     'khoiluongGD':23000000.0,
-    'tang': 26.66
+    'tang': 26.66,
+    'isSaved':1,
   },
   {
     'id':'9',
@@ -97,7 +106,8 @@ final coPhieus = [
     'gia': 9.34,
     'tanggiam': 0.456,
     'khoiluongGD':100000000.0,
-    'tang': 26.66
+    'tang': 26.66,
+    'isSaved':0,
   },
   {
     'id':'10',
@@ -107,7 +117,8 @@ final coPhieus = [
     'gia': 10.34,
     'tanggiam': 0.789,
     'khoiluongGD':9000000.0,
-    'tang': 26.66
+    'tang': 26.66,
+    'isSaved':1,
   },
   {
     'id':'11',
@@ -117,6 +128,7 @@ final coPhieus = [
     'gia': 27.38,
     'tanggiam': 0.543,
     'khoiluongGD':120000000.0,
-    'tang': 26.66
+    'tang': 26.66,
+    'isSaved':0,
   }
 ];

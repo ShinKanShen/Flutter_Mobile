@@ -1,5 +1,4 @@
 import 'package:app_chungkhoan_thuctap/data/danhmuc_data.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:quickalert/quickalert.dart';
 
@@ -28,7 +27,7 @@ class _SuaDanhMuc extends State<SuaDanhMuc> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Danh Muc"),
+        title: const Text("Danh Mục"),
         centerTitle: true,
       ),
       body: ListView.builder(
@@ -41,13 +40,13 @@ class _SuaDanhMuc extends State<SuaDanhMuc> {
                 onDismissed: (direction) {
                   setState(() {
                     if (direction == DismissDirection.startToEnd) {
-                      print("xoas");
+                      
                       danhmucs.removeWhere(
                           (item) => item['name'] == danhmuclist['name']);
                       if ((danhmucs.where((element) =>
                           element['name'] == danhmuclist['name'])).isEmpty) {
-                        showAlert(QuickAlertType.success, "Xoa thanh cong",
-                            "Xoa thanh cong danh muc ${danhmuclist['name']}");
+                        showAlert(QuickAlertType.success, "Xóa thành công",
+                            "Xóa thành công danh mục ${danhmuclist['name']}");
                       }
                     } else {
                       print('Sua');
@@ -67,7 +66,7 @@ class _SuaDanhMuc extends State<SuaDanhMuc> {
                           return AlertDialog(
                             title: const Text("Delete"),
                             content: const Text(
-                                "Ban co chac chan muon xoa danh muc nay"),
+                                "Bạn có chắc chán muốn xóa danh mục này không?"),
                             actions: <Widget>[
                               ElevatedButton(
                                 onPressed: () {
@@ -90,23 +89,23 @@ class _SuaDanhMuc extends State<SuaDanhMuc> {
                           return AlertDialog(
                             title: const Text("Update"),
                             content:
-                                const Text("Ban co chac chan muon cap nhat"),
+                                const Text("ban có chắc chán muốn cập nhật không?"),
                             actions: <Widget>[
                               ElevatedButton(
                                 onPressed: () async {
                                   Navigator.of(context).pop(true);
                                   final name = await openDialog();
-                                  print("gia tri name la: $name");
+                                 
                                   if (name == null || name.isEmpty) {
                                     showAlert(
                                         QuickAlertType.error,
-                                        "Opps! Have some trouble!",
-                                        "Vui Long nhap ten danh muc");
+                                        "Lỗi trong quá trình sửa",
+                                        "Vui lòng nhập tên danh mục mới");
                                     return;
                                   } else {
                                     setState(() {
                                       this.name = name;
-                                      print(this.name);
+                                      
 
                                       if (target.isNotEmpty) {
                                         target[0]['name'] = name.toString();
@@ -116,13 +115,13 @@ class _SuaDanhMuc extends State<SuaDanhMuc> {
                                           .isNotEmpty) {
                                         showAlert(
                                             QuickAlertType.success,
-                                            "Sua thanh cong",
-                                            "Sua thanh cong danh muc $name");
+                                            "Sửa thành công",
+                                            "Sửa thành công danh mục $name");
                                       } else {
                                         showAlert(
                                             QuickAlertType.error,
-                                            "Sua Khong thanh cong",
-                                            "Sua Khong thanh cong danh muc ${danhmuclist['name']} thanh $name");
+                                            "Sửa Không thành công",
+                                            "Sửa không thành công danh mục ${danhmuclist['name']} thành $name");
                                       }
                                     });
                                   }
@@ -186,12 +185,12 @@ class _SuaDanhMuc extends State<SuaDanhMuc> {
   Future<String?> openDialog() => showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-            title: const Text("Cap nhat danh muc"),
+            title: const Text("Cập nhật danh muc"),
             content: TextField(
               controller: _textEditingController,
               autofocus: true,
               decoration:
-                  const InputDecoration(hintText: "Nhap ten danh muc moi"),
+                  const InputDecoration(hintText: "Nhập tên danh mục mới"),
             ),
             actions: [
               TextButton(
