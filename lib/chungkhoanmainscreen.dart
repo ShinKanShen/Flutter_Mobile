@@ -1,6 +1,7 @@
 import 'package:app_chungkhoan_thuctap/chondanhmuc/chondanhmuc.dart';
 import 'package:app_chungkhoan_thuctap/listchungkhoanmain.dart';
 import 'package:app_chungkhoan_thuctap/data/cophieu.dart';
+import 'package:app_chungkhoan_thuctap/menu/menuslide.dart';
 import 'package:app_chungkhoan_thuctap/suaxoadanhmuc/suaxoadanhmuc.dart';
 import 'package:app_chungkhoan_thuctap/themdanhmuc/themdanhmucscreen.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,6 +20,7 @@ class ChungKhoanScreen extends StatefulWidget {
  }
 
 class _chungkhoanScreenState extends State<ChungKhoanScreen>  {
+  final GlobalKey<ScaffoldState> _scaffoldKey =  GlobalKey<ScaffoldState>();
 
    List cophieusort= [];
    bool? buttonAZ =false;
@@ -39,6 +41,7 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen>  {
     @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: const Text(
           'Bảng giá',
@@ -54,8 +57,11 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen>  {
                 Icons.star_border_purple500_outlined,
                 size: 24,
               )),
+              
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              _scaffoldKey.currentState!.openEndDrawer();
+            },
 
             icon: const Icon(
               Icons.menu,
@@ -75,6 +81,7 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen>  {
           ),
         ],
       ),
+      endDrawer: Enddrawer(),
       body: Container(
         margin: const EdgeInsets.only(
           left: 16,
@@ -103,7 +110,7 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen>  {
                                   child: const Padding(
                                     padding: EdgeInsets.all(4),
                                     child: Text(
-                                      "Thao tac",
+                                      "Thao tác",
                                       style: TextStyle(
                                           fontSize: 14,
                                           color: Color.fromRGBO(0, 0, 0, 0.4)),
@@ -111,6 +118,7 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen>  {
                                   )),
                             ),
                             Container(
+                              height: 56,
                                 color: Colors.white,
                                 child: CupertinoActionSheetAction(
                                   onPressed: () {
@@ -125,18 +133,16 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen>  {
                                     
                                   },
                                   
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(16),
-                                    child: Text(
-                                      "Them Danh Muc Moi",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.black,
-                                      ),
+                                  child: const Text(
+                                    "Thêm danh muc mới",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.black,
                                     ),
                                   ),
                                 )),
                             Container(
+                              height: 56,
                                 color: Colors.white,
                                 child: CupertinoActionSheetAction(
                                   onPressed: () {
@@ -147,18 +153,16 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen>  {
                                                 const SuaDanhMuc()));
                                     
                                   },
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(16),
-                                    child: Text(
-                                      "Chinh Sua Danh Muc",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.black,
-                                      ),
+                                  child: const Text(
+                                    "Chỉnh sửa danh mục",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.black,
                                     ),
                                   ),
                                 )),
                             Container(
+                              height: 56,
                                 color: Colors.white,
                                 child: CupertinoActionSheetAction(
                                   onPressed: () {
@@ -169,19 +173,17 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen>  {
                                                 const SuaDanhMuc()));
 
                                   },
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(16),
-                                    child: Text(
-                                      "Xoa Danh Muc",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        color: Color.fromRGBO(209, 51, 56, 1),
-                                      ),
+                                  child: const Text(
+                                    "Xóa danh mục",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Color.fromRGBO(209, 51, 56, 1),
                                     ),
                                   ),
                                 ))
                           ],
                           cancelButton: Container(
+                            height: 56,
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10)),
@@ -190,9 +192,9 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen>  {
                                 Navigator.pop(context);
                               },
                               child: const Text(
-                                "Dong",
+                                "Đóng",
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   color: Color.fromRGBO(0, 0, 0, 1),
                                 ),
                               ),
@@ -237,7 +239,7 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen>  {
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.only(
-                            left: 6, top: 12, bottom: 12, right: 5),
+                            left: 12, top: 12, bottom: 12, right: 8),
                         fixedSize: const Size.fromHeight(32),
                         backgroundColor: const Color.fromRGBO(40, 60, 145, 1),
                         shape: RoundedRectangleBorder(
@@ -245,6 +247,7 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen>  {
                         ),
                       ),
                       child: const Row(
+                        
                         children: [
                           Text(
                             "Danh Muc Yeu Thich",
@@ -252,9 +255,13 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen>  {
                               color: Colors.white,
                             ),
                           ),
-                          Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Colors.white,
+                          Padding(
+                            padding: EdgeInsets.only(left: 4),
+                            child: Icon(
+                              
+                              Icons.keyboard_arrow_down,
+                              color: Colors.white,
+                            ),
                           ),
                         ],
                       ),
@@ -474,6 +481,7 @@ List<Map<String, dynamic>>  sapxepfunction(String chucnang, List<Map<String, dyn
     case 'name': cophieu!.sort((a,b)=> (a['name']).compareTo(b['name']));
     case 'gia': cophieu!.sort((a,b)=> (a['gia']).compareTo(b['gia']));
     case 'khoiluong': cophieu!.sort((a,b)=> (a['khoiluongGD']).compareTo(b['khoiluongGD']));
+    case 'isSaved': cophieu!.sort((a,b)=> (a['isSaved']).compareTo(b['isSaved']));
     default :  break;
 
 
@@ -500,7 +508,7 @@ Widget listview (List? cophieu){
                         tencophieu: chungkhoan['type'] as String,
                         san: chungkhoan['san'] as String,
                         tanggiam: chungkhoan['tanggiam'] as double,
-                        khoiluongGD: chungkhoan['khoiluongGD'] as double,
+                        khoiluongGD: chungkhoan['khoiluongGD'] as int,
                         tangphantr: chungkhoan['tang'] as double,
                         gia: chungkhoan['gia'] as double,
 
@@ -509,6 +517,195 @@ Widget listview (List? cophieu){
             );
 
 
+}
+
+Widget Enddrawer(){
+  return  Drawer(
+    
+    backgroundColor:const  Color.fromARGB(255, 158, 244, 235),
+    child: ListView(
+      padding: const EdgeInsets.only(top: 0),
+      children: [
+        UserAccountsDrawerHeader(
+          accountName: const Text("SharKo Sharko"), 
+          accountEmail: const Text("SharokoSharko@gmail.com"),
+          currentAccountPicture: Container(
+            
+            width: 50, height: 50,
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 255, 255, 255),
+              borderRadius: BorderRadius.circular(80),
+              image: const DecorationImage(
+                
+                image: AssetImage('assets/icons/moon_cloud.png'),
+                
+                fit: BoxFit.cover,
+                scale: 0.2,
+                ),
+            ),
+          ),
+        ),
+        Container(
+          
+          child: Column(
+            children: [
+               const Text("Giao dich xa hoi", style: TextStyle(
+          fontSize: 14, color: Color.fromRGBO(0, 0, 0, 0.4),
+        ),),
+        ListTile(
+          onTap: ()=> null,
+          leading: const Icon(Icons.add_chart_rounded,color: Colors.black54, size: 24,),
+          title: const Text("Home", style: TextStyle(
+            fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black
+          ),
+          
+          ),
+          subtitle: const Text("Tang thu nhap bang cach chia se chien luoc cua ban",
+          
+          style: TextStyle(
+            color: Color.fromRGBO(0, 0, 0, 0.4),
+          ),
+          ),
+        ),
+            ],
+          ),
+        ),
+        Container(
+          
+          child: Column(
+            children: [
+               const Text("Giao dich xa hoi", style: TextStyle(
+          fontSize: 14, color: Color.fromRGBO(0, 0, 0, 0.4),
+        ),),
+        ListTile(
+          onTap: ()=> null,
+          leading: const Icon(Icons.add_chart_rounded,color: Colors.black54, size: 24,),
+          title: const Text("Home", style: TextStyle(
+            fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black
+          ),
+          
+          ),
+          subtitle: const Text("Tang thu nhap bang cach chia se chien luoc cua ban",
+          
+          style:  TextStyle(
+            color: Color.fromRGBO(0, 0, 0, 0.4),
+          ),
+          ),
+        ),
+            ],
+          ),
+        ),
+        Container(
+          
+          child: Column(
+            children: [
+               const Text("Giao dich xa hoi", style: TextStyle(
+          fontSize: 14, color: Color.fromRGBO(0, 0, 0, 0.4),
+        ),),
+        ListTile(
+          onTap: ()=> null,
+          leading:const  Icon(Icons.add_chart_rounded,color: Colors.black54, size: 24,),
+          title: const Text("Home", style: TextStyle(
+            fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black
+          ),
+          
+          ),
+          subtitle: const Text("Tang thu nhap bang cach chia se chien luoc cua ban",
+          
+          style: TextStyle(
+            color: Color.fromRGBO(0, 0, 0, 0.4),
+          ),
+          ),
+        ),
+        ListTile(
+          onTap: ()=> null,
+          leading:const  Icon(Icons.add_chart_rounded,color: Colors.black54, size: 24,),
+          title: const Text("Danh gia ung dung", style: TextStyle(
+            fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black
+          ),
+          
+          ),
+          subtitle: const Text("Tang thu nhap bang cach chia se chien luoc cua ban",
+          
+          style: TextStyle(
+            color: Color.fromRGBO(0, 0, 0, 0.4),
+          ),
+          ),
+        ),
+        ListTile(
+          onTap: ()=> null,
+          leading: const Icon(Icons.add_chart_rounded,color: Colors.black54, size: 24,),
+          title: const Text("Chat truc tuyen", style: TextStyle(
+            fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black
+          ),
+          
+          ),
+          subtitle: const Text("Tang thu nhap bang cach chia se chien luoc cua ban",
+          
+          style: TextStyle(
+            color: Color.fromRGBO(0, 0, 0, 0.4),
+          ),
+          ),
+        ),
+        ListTile(
+          onTap: (){},
+          leading: const Icon(Icons.add_chart_rounded,color: Colors.black54, size: 24,),
+          title:const  Text("De xuat mot tinh nang", style: TextStyle(
+            fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black
+          ),
+          
+          ),
+          subtitle: const Text("Tang thu nhap bang cach chia se chien luoc cua ban",
+          
+          style: TextStyle(
+            color: Color.fromRGBO(0, 0, 0, 0.4),
+          ),
+          ),
+        ),
+        ListTile(
+          onTap: ()=> null,
+          leading: const Icon(Icons.add_chart_rounded,color: Colors.black54, size: 24,),
+          title: const Text("Giay to phap ly", style: TextStyle(
+            fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black
+          ),
+          
+          ),
+          subtitle: const Text("Tang thu nhap bang cach chia se chien luoc cua ban",
+          
+          style: TextStyle(
+            color: Color.fromRGBO(0, 0, 0, 0.4),
+          ),
+          ),
+        ),
+        ListTile(
+          onTap: ()=> null,
+          leading: const Icon(Icons.add_chart_rounded,color: Colors.black54, size: 24,),
+          title: const Text("Home", style: TextStyle(
+            fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black
+          ),
+          
+          ),
+          subtitle: const Text("Tang thu nhap bang cach chia se chien luoc cua ban",
+          
+          style: TextStyle(
+            color: Color.fromRGBO(0, 0, 0, 0.4),
+          ),
+          ),
+        ),
+
+
+            ],
+          ),
+        ),
+        
+       
+        
+
+
+
+      ],
+    )
+  );
 }
 
 
