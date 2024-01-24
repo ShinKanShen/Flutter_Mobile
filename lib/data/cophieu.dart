@@ -1,3 +1,9 @@
+import 'package:flutter/material.dart';
+
+class CoPhieuProvider extends ChangeNotifier{
+  
+}
+
 final coPhieus = [
   {
     'id':'0',
