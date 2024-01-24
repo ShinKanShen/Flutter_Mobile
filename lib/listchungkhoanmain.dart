@@ -5,7 +5,7 @@ class LayOutChungKhoan extends StatelessWidget {
   final String tencongty;
   final String san;
   final double gia;
-  final int khoiluongGD;
+  final double khoiluongGD;
   final double tanggiam;
   final double tangphantr;
 

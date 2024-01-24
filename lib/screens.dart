@@ -5,7 +5,7 @@ import 'listchungkhoanmain.dart';
 import 'package:flutter/material.dart' show BuildContext, Column, Expanded, ListView, MainAxisAlignment, SizedBox, StatelessWidget, Text, Widget;
 
 
-class  ThiTruong extends StatelessWidget {
+class ThiTruong extends StatelessWidget {
   const ThiTruong({super.key});
 
   @override
@@ -27,7 +27,7 @@ class  ThiTruong extends StatelessWidget {
                         tencophieu: chungkhoan['type'] as String,
                         san: chungkhoan['san'] as String,
                         tanggiam: chungkhoan['tanggiam'] as double,
-                        khoiluongGD: chungkhoan['khoiluongGD'] as int,
+                        khoiluongGD: chungkhoan['khoiluongGD'] as double,
                         tangphantr: chungkhoan['tang'] as double,
                         gia: chungkhoan['gia'] as double,
 
@@ -63,7 +63,7 @@ class  ThiTruong2 extends StatelessWidget {
                         tencophieu: chungkhoan['type'] as String,
                         san: chungkhoan['san'] as String,
                         tanggiam: chungkhoan['tanggiam'] as double,
-                        khoiluongGD: chungkhoan['khoiluongGD'] as int,
+                        khoiluongGD: chungkhoan['khoiluongGD'] as double,
                         tangphantr: chungkhoan['tang'] as double,
                         gia: chungkhoan['gia'] as double,
 
@@ -97,7 +97,7 @@ class  ThiTruong3 extends StatelessWidget {
                         tencophieu: chungkhoan['type'] as String,
                         san: chungkhoan['san'] as String,
                         tanggiam: chungkhoan['tanggiam'] as double,
-                        khoiluongGD: chungkhoan['khoiluongGD'] as int,
+                        khoiluongGD: chungkhoan['khoiluongGD'] as double,
                         tangphantr: chungkhoan['tang'] as double,
                         gia: chungkhoan['gia'] as double,
 
@@ -131,7 +131,7 @@ class  ThiTruong4 extends StatelessWidget {
                         tencophieu: chungkhoan['type'] as String,
                         san: chungkhoan['san'] as String,
                         tanggiam: chungkhoan['tanggiam'] as double,
-                        khoiluongGD: chungkhoan['khoiluongGD'] as int,
+                        khoiluongGD: chungkhoan['khoiluongGD'] as double,
                         tangphantr: chungkhoan['tang'] as double,
                         gia: chungkhoan['gia'] as double,
 

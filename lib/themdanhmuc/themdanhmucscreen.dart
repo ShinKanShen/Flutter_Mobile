@@ -23,8 +23,8 @@ class _ThemDanhMuc extends State<ThemDanhMuc>{
     
     
     super.initState();
-    sapxepfunction('isSaved',coPhieus);
-    print(coPhieus);
+   
+    
   }
 
   
@@ -53,7 +53,7 @@ class _ThemDanhMuc extends State<ThemDanhMuc>{
             onPressed: (){
               Navigator.push(
                 context,
-               MaterialPageRoute(builder: (context)=> const ChungKhoanScreen())
+               MaterialPageRoute(builder: (context)=>  ChungKhoanScreen.create())
                
                );
               

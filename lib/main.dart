@@ -1,3 +1,4 @@
+import 'package:app_chungkhoan_thuctap/data/cophieus_data_model.dart';
 import 'package:app_chungkhoan_thuctap/screens.dart';
 import 'package:app_chungkhoan_thuctap/themdanhmuc/themdanhmucscreen.dart';
 import 'package:flutter/services.dart';
@@ -30,33 +31,55 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class BottomNav extends StatelessWidget {
+class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
 
   @override
+  State<BottomNav> createState() => _BottomNavState();
+}
+
+class _BottomNavState extends State<BottomNav> {
+
+   final PersistentTabController _controller =  PersistentTabController(initialIndex: 0);
+  @override
   Widget build(BuildContext context) {
-    List<Widget> _buildScreens() {
-      return  [
-         const ChungKhoanScreen(),
-         
-         const ThiTruong2(),
-         const ThiTruong3(),
-         const ThiTruong4(),
-         const ThemDanhMuc()
-      ];
-    }
-    PersistentBottomNavBarItem getNavBarItem(
-        {required String iconSvgPath, String? title, }) {
-      return PersistentBottomNavBarItem(
-        icon: SvgPicture.asset(iconSvgPath),
+    return PersistentTabView(
+      context,
+      controller: _controller,
+      screens: _buildScreens(),
+      items: _navBarsItems(),
+      confineInSafeArea: true,
+      backgroundColor: Colors.white, // Default is Colors.white.
+      handleAndroidBackButtonPress: true, // Default is true.
+      resizeToAvoidBottomInset:
+          true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+      stateManagement: true, // Default is true.
+      hideNavigationBarWhenKeyboardShows:
+          true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+      decoration: NavBarDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        colorBehindNavBar: Colors.white,
+      ),
+      popAllScreensOnTapOfSelectedTab: true,
+      popActionScreens: PopActionScreensType.all,
+      itemAnimationProperties: const ItemAnimationProperties(
+        // Navigation Bar's items animation properties.
+        duration: Duration(milliseconds: 200),
+        curve: Curves.ease,
+      ),
+      screenTransitionAnimation: const ScreenTransitionAnimation(
+        // Screen transition animation on change of selected tab.
+        animateTabTransition: true,
+        curve: Curves.ease,
+        duration: Duration(milliseconds: 200),
+      ),
+      navBarHeight: 67,
+      navBarStyle:
+          NavBarStyle.style3, // Choose the nav bar style with this property.
+    );
+  }
 
-        title: title,
-        activeColorPrimary: const Color(0xff2A5CAA),
-        inactiveColorPrimary: const Color(0xff000000).withOpacity(0.7),
-
-      );
-    }
-    _buildIconNotification(context, Color color) {
+  _buildIconNotification(context, Color color) {
       return Stack(
         children: [
           SvgPicture.asset("assets/images/svg/menu-notification.svg",
@@ -73,8 +96,8 @@ class BottomNav extends StatelessWidget {
                 minWidth: 12,
                 minHeight: 12,
               ),
-              child: const Text(
-                '9',
+              child:  Text(
+                notificationData.length.toString(),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 8,
@@ -124,45 +147,29 @@ class BottomNav extends StatelessWidget {
 
 
 
+    List<Widget> _buildScreens() {
+      return  [
+        ChungKhoanScreen.create(),
+         const ThiTruong2(),
+         const ThiTruong3(),
+         const ThiTruong4(),
+         const ThemDanhMuc()
+      ];
+    }
+
+    PersistentBottomNavBarItem getNavBarItem(
+        {required String iconSvgPath, String? title, }) {
+      return PersistentBottomNavBarItem(
+        icon: SvgPicture.asset(iconSvgPath),
+
+        title: title,
+        activeColorPrimary: const Color(0xff2A5CAA),
+        inactiveColorPrimary: const Color(0xff000000).withOpacity(0.7),
+
+      );
+    }
+
+
     //
-    PersistentTabController _controller;
-
-    _controller = PersistentTabController(initialIndex: 0);
-
-    return PersistentTabView(
-      context,
-      controller: _controller,
-      screens: _buildScreens(),
-      items: _navBarsItems(),
-      confineInSafeArea: true,
-      
-      backgroundColor: Colors.white, // Default is Colors.white.
-      handleAndroidBackButtonPress: true, // Default is true.
-      resizeToAvoidBottomInset:
-          true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-      stateManagement: true, // Default is true.
-      hideNavigationBarWhenKeyboardShows:
-          true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
-      decoration: NavBarDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        colorBehindNavBar: Colors.white,
-      ),
-      popAllScreensOnTapOfSelectedTab: true,
-      popActionScreens: PopActionScreensType.all,
-      itemAnimationProperties: const ItemAnimationProperties(
-        // Navigation Bar's items animation properties.
-        duration: Duration(milliseconds: 200),
-        curve: Curves.ease,
-      ),
-      screenTransitionAnimation: const ScreenTransitionAnimation(
-        // Screen transition animation on change of selected tab.
-        animateTabTransition: true,
-        curve: Curves.ease,
-        duration: Duration(milliseconds: 200),
-      ),
-      navBarHeight: 67,
-      navBarStyle:
-          NavBarStyle.style3, // Choose the nav bar style with this property.
-    );
-  }
+  
 }
