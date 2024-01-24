@@ -1,15 +1,25 @@
 
 
+
+
 import 'package:app_chungkhoan_thuctap/chungkhoanmainscreen.dart';
 import 'package:app_chungkhoan_thuctap/data/cophieu.dart';
 import 'package:app_chungkhoan_thuctap/data/danhmuc_data.dart';
+import 'package:app_chungkhoan_thuctap/models/chung_khoan_app_global_provider.dart';
 import 'package:app_chungkhoan_thuctap/themdanhmuc/themdanhmuclist.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:quickalert/quickalert.dart';
 
 class  ThemDanhMuc extends StatefulWidget {
   const ThemDanhMuc ({super.key});
+  // static Widget create(){
+  //   return ChangeNotifierProvider(
 
+  //     create: (context)=> ChungKhoanAppProvider(),
+  //     child: const ThemDanhMuc(),
+  //     );
+  // }
   @override
   _ThemDanhMuc createState() => _ThemDanhMuc();
   
@@ -17,14 +27,14 @@ class  ThemDanhMuc extends StatefulWidget {
 class _ThemDanhMuc extends State<ThemDanhMuc>{
   final TextEditingController _textEditingController = TextEditingController();
 
-  List saveList = [];
+  late ChungKhoanAppProvider _chungKhoanAppProvider;
+  
   @override
   void initState() {
-    
-    
-    super.initState();
-   
-    
+    _chungKhoanAppProvider = context.read<ChungKhoanAppProvider>();
+    _chungKhoanAppProvider.getNotSaveCoPhieus();
+
+    super.initState(); 
   }
 
   
@@ -53,7 +63,7 @@ class _ThemDanhMuc extends State<ThemDanhMuc>{
             onPressed: (){
               Navigator.push(
                 context,
-               MaterialPageRoute(builder: (context)=>  ChungKhoanScreen.create())
+               MaterialPageRoute(builder: (context)=>  ChungKhoanScreen())
                
                );
               
@@ -160,18 +170,20 @@ class _ThemDanhMuc extends State<ThemDanhMuc>{
                     height: 20,
                     color: Colors.black,
                   ),
-                Expanded(child: ListView.builder(
-                  itemCount: coPhieus.length,
-                  itemBuilder:(context, index){
-                    final themcp = coPhieus[index];
-                    return ThemDanhMucList(
-                        tenCongty: themcp['name'] as String,
-                        tencp: themcp['type'] as String ,
-                        tenSan: themcp['san'] as String,
-                        isSave: themcp['isSaved'] as int, 
+                  // list view 
+                listViewWidget(context),
+                // Expanded(child: ListView.builder(
+                //   itemCount: coPhieus.length,
+                //   itemBuilder:(context, index){
+                //     final themcp = coPhieus[index];
+                //     return ThemDanhMucList(
+                //         tenCongty: themcp['name'] as String,
+                //         tencp: themcp['type'] as String ,
+                //         tenSan: themcp['san'] as String,
+                //         isSave: themcp['isSaved'] as int, 
 
-                    ) ;
-                  }))
+                //     ) ;
+                //   }))
             ],
           ),
         ),
@@ -180,6 +192,25 @@ class _ThemDanhMuc extends State<ThemDanhMuc>{
     
     
   }
+Widget listViewWidget (BuildContext context){
+      return Selector<ChungKhoanAppProvider, List>(
+        builder:  (context, notSavedList, child){
+          return Expanded(child: ListView.builder(
+                  itemCount: notSavedList.length,
+                  itemBuilder:(context, index){
+                    final themcp = notSavedList[index];
+                    return ThemDanhMucList(
+                        tenCongty: themcp['name'] as String,
+                        tencp: themcp['type'] as String ,
+                        tenSan: themcp['san'] as String,
+                        isSave: themcp['isSaved'] as int, 
+
+                    ) ;
+                  }));
+        } , 
+        shouldRebuild: (p,n)=> true,
+        selector: (_,p1)=> p1.getCoPhieusNotSaved);
+    }
   }
 
 

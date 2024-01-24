@@ -1,5 +1,6 @@
 import 'package:app_chungkhoan_thuctap/chondanhmuc/chondanhmuc.dart';
-import 'package:app_chungkhoan_thuctap/chung_khoan_change_notifer.dart';
+import 'package:app_chungkhoan_thuctap/models/chung_khoan_app_global_provider.dart';
+import 'package:app_chungkhoan_thuctap/models/chung_khoan_change_notifer.dart';
 import 'package:app_chungkhoan_thuctap/listchungkhoanmain.dart';
 import 'package:app_chungkhoan_thuctap/data/cophieu.dart';
 
@@ -12,12 +13,12 @@ import 'package:provider/provider.dart';
 
 
 class ChungKhoanScreen extends StatefulWidget {
-  static Widget create() {
-    return ChangeNotifierProvider(
-      create: (context) => ChungKhoanChangeNotifier(),
-      child: const ChungKhoanScreen(),
-    );
-  }
+  // static Widget create() {
+  //   return ChangeNotifierProvider(
+  //     create: (context) => ChungKhoanChangeNotifier(),
+  //     child: const ChungKhoanScreen(),
+  //   );
+  // }
 
   const ChungKhoanScreen({super.key});
 
@@ -28,21 +29,25 @@ class ChungKhoanScreen extends StatefulWidget {
 class _chungkhoanScreenState extends State<ChungKhoanScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  List cophieusort = [];
-  bool? buttonAZ = false;
-  bool? buttonGia = false;
-  bool? buttonKhoiLuong = false;
+  // List cophieusort = [];
+  // bool? buttonAZ = false;
+  // bool? buttonGia = false;
+  // bool? buttonKhoiLuong = false;
 
+ 
   late ChungKhoanChangeNotifier manager;
 
   late ChungKhoanChangeNotifier sortItemProvider; 
+  late ChungKhoanAppProvider appManager ;
 
   @override
   void initState() {
+
+    appManager = Provider.of<ChungKhoanAppProvider>(context, listen: false);
     sortItemProvider = Provider.of<ChungKhoanChangeNotifier>(context, listen: false);
     manager = context.read<ChungKhoanChangeNotifier>();
-    coPhieus.sort((a,b)=> (a['name'] as Comparable).compareTo(b['name'] as Comparable));
-    cophieusort.addAll(coPhieus.toList());
+    //coPhieus.sort((a,b)=> (a['name'] as Comparable).compareTo(b['name'] as Comparable));
+    manager.loadSortedList(SortCodeConst.az);
     super.initState();
   }
 
@@ -488,7 +493,7 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen> {
             ),
             // phan hien thi gia chung khoan
 
-            listview(context, ),
+            listviewWidget(context)
 
             //  const Expanded(
             //     child:  BotttomMenu())
@@ -504,9 +509,8 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen> {
       builder: (context, currentIndexCode, child) {
         return TextButton(
           onPressed: () {
-            manager.changeIndex(indexCode);
-            print(indexCode);
-            
+            manager.changeIndex(indexCode);           
+            manager.sortCoPhieus(indexCode);                        
           },
           style: TextButton.styleFrom(
               side: BorderSide(
@@ -534,9 +538,9 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen> {
         return ElevatedButton(
           onPressed: () {
             manager.sortFunction(sortCode);
-            print(sortCode);
-            manager.loadSortedList(sortCode,true);
-            print(coPhieus);
+            
+            manager.loadSortedList(sortCode);
+            
           },
           style: ElevatedButton.styleFrom(
             padding:
@@ -599,9 +603,10 @@ Widget builderSheet() => const ChonDanhMuc();
 
 // widget listView
 
-Widget listview(BuildContext context) {
+
+Widget listviewWidget(BuildContext context) {
   return Selector<ChungKhoanChangeNotifier, List>(
-    selector: (p0, p1) => p1.loadCoPhieus,
+    selector: (p0, p1) => p1.getIndexItem,
     shouldRebuild: (p,n)=> true,
     builder: (context, listCoPhieus, child) {
       return Expanded(

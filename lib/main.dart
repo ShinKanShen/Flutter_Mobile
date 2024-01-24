@@ -1,4 +1,6 @@
 import 'package:app_chungkhoan_thuctap/data/cophieus_data_model.dart';
+import 'package:app_chungkhoan_thuctap/models/chung_khoan_app_global_provider.dart';
+import 'package:app_chungkhoan_thuctap/models/chung_khoan_change_notifer.dart';
 import 'package:app_chungkhoan_thuctap/screens.dart';
 import 'package:app_chungkhoan_thuctap/themdanhmuc/themdanhmucscreen.dart';
 import 'package:flutter/services.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:app_chungkhoan_thuctap/chungkhoanmainscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -15,18 +18,37 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+   const MyApp({super.key});
+  static Widget create(){
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: ((context) => ChungKhoanAppProvider())),
+        ChangeNotifierProvider(create: (context)=> ChungKhoanChangeNotifier()),
+      ],
+      child: const MyApp(),
+
+    );
+   
+  }
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: ((context) => ChungKhoanAppProvider())),
+        ChangeNotifierProvider(create: (context)=> ChungKhoanChangeNotifier()),
+      ],
+      child:MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'App Chung Khoan Thuc Tap',
       theme: ThemeData.light(
         useMaterial3: true,
       ),
       home: const BottomNav(),
+      )
+
+     
     );
   }
 }
@@ -149,7 +171,7 @@ class _BottomNavState extends State<BottomNav> {
 
     List<Widget> _buildScreens() {
       return  [
-        ChungKhoanScreen.create(),
+        const ChungKhoanScreen(),
          const ThiTruong2(),
          const ThiTruong3(),
          const ThiTruong4(),

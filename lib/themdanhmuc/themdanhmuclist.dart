@@ -66,8 +66,8 @@ class ThemDanhMucList extends StatelessWidget {
                   ),
                 
                 
-                icon:    Icon(Icons.star,
-                color:  (isSave>0)? Colors.white: const Color.fromARGB(255, 225, 182, 30),
+                icon: Icon(Icons.star,
+                color:  (isSave<=0)? Colors.grey: const Color.fromARGB(255, 225, 182, 30),
                  
                   
                 )
