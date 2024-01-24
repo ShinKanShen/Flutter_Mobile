@@ -41,21 +41,53 @@ class ChungKhoanChangeNotifier with ChangeNotifier {
 
 
 final List _cophieus = coPhieus;
-List get loadCoPhieus => _cophieus;
+List get loadCoPhieus => sortCoPhieusIndex;
+
+
 
   // bool _loadDefaultList = SortListConst.sortAz;
   // bool get loadDefaultList => !_loadDefaultList;
 
+  List sortCoPhieusIndex =[];
   
-  
-  
+  List sortCoPhieus(String dataSortCode){
+    sortCoPhieusIndex.addAll(      
+      (coPhieus.where((element) => element['san']==dataSortCode)).toList()
+    );
+    return sortCoPhieusIndex;
+  }
 
+  void clearCoPhieuIndex(){
+    sortCoPhieusIndex.clear();
+  }
+
+  List get getIndexItem => sortCoPhieusIndex;
   void changeIndex(String indexCode){
     if (_currentIndex!= indexCode)
     {
       _currentIndex = indexCode;
+      clearCoPhieuIndex();
       notifyListeners();
       loadSymbol();
+    }
+    switch(indexCode){
+      case IndexCodeConst.vn30:
+        sortCoPhieus(indexCode);
+        notifyListeners(); break;
+      case IndexCodeConst.hnx:
+        sortCoPhieus(indexCode);
+        notifyListeners(); break;
+      case IndexCodeConst.hsx:
+        sortCoPhieus(indexCode);
+        notifyListeners(); 
+        break;
+      case IndexCodeConst.hnx30:
+        sortCoPhieus(indexCode);
+        notifyListeners(); break;
+      case IndexCodeConst.upcom:
+        sortCoPhieus(indexCode);
+        notifyListeners(); break;
+      default: break;
     }
   }
 
@@ -63,6 +95,7 @@ List get loadCoPhieus => _cophieus;
   void sortFunction(String sortFucntionCode){
     if(_currentSort!=sortFucntionCode){
       _currentSort=sortFucntionCode;
+      clearCoPhieuIndex();
       notifyListeners();
     }
   }
@@ -85,22 +118,21 @@ List get loadCoPhieus => _cophieus;
   }
 
 
- void loadSortedList(String curentSortCode , bool currentSortCode){
+ void loadSortedList(String curentSortCode ){
+    sortCoPhieusIndex.addAll(_cophieus);
   switch(currentSortIndexCode){
     case SortCodeConst.az: 
-      _cophieus.sort((a,b)=> (a['name']).compareTo(b['name']));
+      sortCoPhieusIndex.sort((a,b)=> (a['name']).compareTo(b['name']));
       //_loadDefaultList =!currentSortCode;
-      notifyListeners();
-      
+      notifyListeners();      
       break;
     case SortCodeConst.gia: 
-    _cophieus.sort((a,b)=> (a['gia']).compareTo(b['gia']));
+    sortCoPhieusIndex.sort((a,b)=> (a['gia']).compareTo(b['gia']));
    // _loadDefaultList =!currentSortCode;
     notifyListeners();
-    
       break;
     case SortCodeConst.khoiluong: 
-    _cophieus.sort((a,b)=> (a['khoiluongGD']).compareTo(b['khoiluongGD']));
+    sortCoPhieusIndex.sort((a,b)=> (a['khoiluongGD']).compareTo(b['khoiluongGD']));
     //_loadDefaultList =!currentSortCode;
     notifyListeners();
     
