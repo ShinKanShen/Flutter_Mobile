@@ -12,7 +12,7 @@ class SuaDanhMuc extends StatefulWidget {
 class _SuaDanhMuc extends State<SuaDanhMuc> {
   late TextEditingController _textEditingController;
   String name = '';
-  List<Map<String, String>> target = [];
+  List<Map<String, dynamic>> target = [];
   @override
   void initState() {
     _textEditingController = TextEditingController();

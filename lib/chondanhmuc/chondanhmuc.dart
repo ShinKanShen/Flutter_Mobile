@@ -1,12 +1,29 @@
 
+
 import 'package:app_chungkhoan_thuctap/chondanhmuc/chondanhlist.dart';
 import 'package:app_chungkhoan_thuctap/data/danhmuc_data.dart';
+import 'package:app_chungkhoan_thuctap/models/chung_khoan_app_global_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class ChonDanhMuc extends StatelessWidget {
+class ChonDanhMuc extends StatefulWidget {
   const ChonDanhMuc({
     super.key,
   });
+
+  @override
+  State<ChonDanhMuc> createState() => _ChonDanhMucState();
+}
+
+class _ChonDanhMucState extends State<ChonDanhMuc> {
+
+  late ChungKhoanAppProvider _chungKhoanAppProvider;
+
+  @override
+  void initState(){
+    _chungKhoanAppProvider = context.read<ChungKhoanAppProvider>();
+    super.initState(); 
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,15 +82,33 @@ class ChonDanhMuc extends StatelessWidget {
         const SizedBox(
           height: 16,
         ),
-        Expanded(
+
+        listViewDanhMuc(context),
+        // Expanded(
+        //   child: ListView.builder(
+        //       itemCount: danhmucs.length,
+        //       itemBuilder: (context, index) {
+        //         final danhmuc = danhmucs[index];
+        //         return DanhMucList(tendanhmuc: danhmuc['name'] as String);
+        //       }),
+        // )
+      ]),
+    );
+  }
+
+  Widget listViewDanhMuc(BuildContext context){
+    return Selector<ChungKhoanAppProvider, List>(
+      builder: (context, danhmucs, child){
+        return  Expanded(
           child: ListView.builder(
               itemCount: danhmucs.length,
               itemBuilder: (context, index) {
                 final danhmuc = danhmucs[index];
                 return DanhMucList(tendanhmuc: danhmuc['name'] as String);
               }),
-        )
-      ]),
-    );
+        );
+      },
+      shouldRebuild: (previous, next) => true,
+      selector: (_,p1)=> p1.getDanhmucs);
   }
 }
