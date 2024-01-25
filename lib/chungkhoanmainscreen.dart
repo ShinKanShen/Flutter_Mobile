@@ -231,17 +231,18 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen> {
                     // chon danh muc
                     ElevatedButton(
                       onPressed: () {
-                        showModalBottomSheet(
-                            context: context,
-                            // an navigation
-                            useRootNavigator: true,
-                            backgroundColor:
-                                const Color.fromARGB(255, 255, 255, 255),
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(20),
-                            )),
-                            builder: (context) => builderSheet());
+                        showButtonSheet(context);
+                        // showModalBottomSheet(
+                        //     context: context,
+                        //     // an navigation
+                        //     useRootNavigator: true,
+                        //     backgroundColor:
+                        //         const Color.fromARGB(255, 255, 255, 255),
+                        //     shape: const RoundedRectangleBorder(
+                        //         borderRadius: BorderRadius.vertical(
+                        //       top: Radius.circular(20),
+                        //     )),
+                        //     builder: (context) => builderSheet());
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.only(
@@ -581,6 +582,20 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen> {
 
 // chon danh muc
 Widget builderSheet() => const ChonDanhMuc();
+
+Future showButtonSheet(BuildContext context){
+  return showModalBottomSheet(
+                            context: context,
+                            // an navigation
+                            useRootNavigator: true,
+                            backgroundColor:
+                                const Color.fromARGB(255, 255, 255, 255),
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(20),
+                            )),
+                            builder: (context) => builderSheet());
+}
 
 // sap xep
 // List<Map<String, dynamic>>  sapxepfunction(String chucnang, List<Map<String, dynamic>>? cophieu){

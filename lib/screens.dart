@@ -1,8 +1,11 @@
 
 import 'package:app_chungkhoan_thuctap/data/cophieu.dart';
+import 'package:app_chungkhoan_thuctap/models/chung_khoan_app_global_provider.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
 import 'listchungkhoanmain.dart';
-import 'package:flutter/material.dart' show BuildContext, Column, Expanded, ListView, MainAxisAlignment, SizedBox, StatelessWidget, Text, Widget;
+import 'package:flutter/material.dart' show BuildContext, Colors, Column, Expanded, ListView, MainAxisAlignment, SizedBox, StatelessWidget, Text, Widget;
 
 
 class ThiTruong extends StatelessWidget {
@@ -10,30 +13,27 @@ class ThiTruong extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final ChungKhoanAppProvider _chungKhoanAppProvider = context.read<ChungKhoanAppProvider>();
     return Column(
+      
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Expanded(child: Text("Screen 2")),
-        SizedBox(
-                  
-                  height: 570,
-                  child: ListView.builder(
-                    itemCount: coPhieus.length,
-                  
-                  itemBuilder: (context, index) {
-                    final chungkhoan = coPhieus[index];
-                    return  LayOutChungKhoan(
-                        tencongty: chungkhoan['name'] as String,
-                        tencophieu: chungkhoan['type'] as String,
-                        san: chungkhoan['san'] as String,
-                        tanggiam: chungkhoan['tanggiam'] as double,
-                        khoiluongGD: chungkhoan['khoiluongGD'] as double,
-                        tangphantr: chungkhoan['tang'] as double,
-                        gia: chungkhoan['gia'] as double,
-
-                    );}
-                      ),
-                ),
+        Container(
+          width: double.infinity,
+          
+          padding:const  EdgeInsets.all(16),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+          ),
+          child: Column(
+            children: [
+              Text(_chungKhoanAppProvider.getDanhmucs.last['name'], style: const TextStyle(
+                color: Colors.black, fontSize: 18,
+              ),)
+            ],
+          ),
+        )
       ],
     );
   }
