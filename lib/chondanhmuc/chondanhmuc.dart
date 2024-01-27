@@ -104,7 +104,11 @@ class _ChonDanhMucState extends State<ChonDanhMuc> {
               itemCount: danhmucs.length,
               itemBuilder: (context, index) {
                 final danhmuc = danhmucs[index];
-                return DanhMucList(tendanhmuc: danhmuc['name'] as String);
+                
+                return DanhMucList(
+                  tendanhmuc: danhmuc['name'] as String,
+                  index: index,
+                );
               }),
         );
       },

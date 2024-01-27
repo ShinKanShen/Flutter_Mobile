@@ -103,7 +103,7 @@ class _ThemDanhMuc extends State<ThemDanhMuc> {
                     _chungKhoanAppProvider.addDanhMuc({
                       'id': danhmucs.length.toString(),
                       'name': _textEditingController.text.toString(),
-                      'cophieu': _chungKhoanAppProvider.coPhieuSelected,
+                      'cophieus': _chungKhoanAppProvider.coPhieuSelected,
                     });
 
                     if (_chungKhoanAppProvider.findDanhMuc(
@@ -114,8 +114,9 @@ class _ThemDanhMuc extends State<ThemDanhMuc> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const DanhMucDisplayItem()));
+                              builder: (context) =>  DanhMucDisplayItem(tendanhmuc: _chungKhoanAppProvider.getDanhmucs.last['name'],)));
 
+                      
                       showAlert(QuickAlertType.success, "Chúc Mừng",
                           "Thêm danh mục thành công!");
                     } else {
@@ -175,16 +176,18 @@ class _ThemDanhMuc extends State<ThemDanhMuc> {
   }
 
   Widget listViewWidget(BuildContext context) {
-    return Selector<ChungKhoanAppProvider, List>(
-        builder: (context, notSavedList, child) {
+    print('rebuild list view');
+    // return Selector<ChungKhoanAppProvider, List>(
+    //     builder: (context, notSavedList, child) {
           return Expanded(
               child: ListView.builder(
-                  itemCount: notSavedList.length,
-                  
+                  itemCount: _chungKhoanAppProvider.getCoPhieusNotSaved.length,
+          
                   itemBuilder: (context, index) {
-                    print(notSavedList.length);
-                    final themcp = notSavedList[index];
+                   
+                    final themcp = _chungKhoanAppProvider.getCoPhieusNotSaved[index];
                     return ThemDanhMucList(
+                      index: index,
                       id: themcp['id'] as String,
                       tenCongty: themcp['name'] as String,
                       tencp: themcp['type'] as String,
@@ -196,8 +199,8 @@ class _ThemDanhMuc extends State<ThemDanhMuc> {
                       khoiluongGD: themcp['khoiluongGD'],
                     );
                   }));
-        },
-        shouldRebuild: (p, n) => true,
-        selector: (_, p1) => p1.getCoPhieusNotSaved);
+        //},
+        // shouldRebuild: (p,n)=> true,
+        // selector: (_, p1) => p1.getCoPhieusNotSaved);
   }
 }
