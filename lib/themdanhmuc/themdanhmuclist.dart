@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 class ThemDanhMucList extends StatefulWidget {
   final String id;
+  
   final String tencp;
   final String tenCongty;
   final String tenSan;
@@ -14,13 +15,14 @@ class ThemDanhMucList extends StatefulWidget {
   final double tanggiam;
   final double tangphantr;
    int isSave;
-
+  int index;
    ThemDanhMucList({
     required this.id,
     required this.tenCongty,
     required this.tencp,
     required this.tenSan,
     required this.isSave,
+    required this.index,
     super.key, required this.gia, required this.khoiluongGD, required this.tanggiam, required this.tangphantr});
 
   @override
@@ -28,6 +30,14 @@ class ThemDanhMucList extends StatefulWidget {
 }
 
 class _ThemDanhMucListState extends State<ThemDanhMucList> {
+
+  @override
+  void initState(){
+    
+    super.initState();
+  
+    
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -74,48 +84,39 @@ class _ThemDanhMucListState extends State<ThemDanhMucList> {
                 
                 ),
           
-                 IconButton(
-                    onPressed: (){
-                      setState(() {
-                        
-                      });
-                      widget.isSave ==0? widget.isSave=1:widget.isSave =0;
-                      if(widget.isSave ==1){
-                        _chungKhoanAppProvider.coPhieuSelected.add({
-                          'id': widget.id,
-                           
-                            'name':widget.tenCongty,
-                            'type':widget.tencp,
-                            'san':widget.tenSan,
-                            'gia': widget.gia,
-                            'tanggiam': widget.tanggiam,
-                            'khoiluongGD':widget.khoiluongGD,
-                            'tang': widget.tangphantr,
-                            
-                        });
-                  
-                      }else if(widget.isSave == 0){
-                        _chungKhoanAppProvider.coPhieuSelected.removeWhere((element) => element['type']==widget.tencp);
-                      }
-                      print(_chungKhoanAppProvider.coPhieuSelected);
-                      print(widget.id);
-                      print(widget.isSave);
-                    }, 
-                    style: ElevatedButton.styleFrom(
+               Selector<ChungKhoanAppProvider, int>(
+                selector: (_,p1)=> p1.checkItemSelected,
+                 builder:(context, data, child){
+                  return IconButton(
+                        onPressed: (){
+                          
+                          widget.isSave = _chungKhoanAppProvider.checkSelectedItem(widget.isSave);
+                          if(widget.isSave ==1){
+                            _chungKhoanAppProvider.coPhieuSelected.add(
+                                _chungKhoanAppProvider.getCoPhieusNotSaved[widget.index],
+                            );
                       
-                    ),
-                  
-                  
-                  icon: Icon(Icons.star,
-                  color:  (widget.isSave<=0)? Colors.grey: const Color.fromARGB(255, 225, 182, 30),
-                   
-                    
-                  )
+                          }else if(widget.isSave == 0){
+                            _chungKhoanAppProvider.coPhieuSelected.removeWhere((element) => element['type']==widget.tencp);
+                          }
+                          print('id: ${widget.id}');
+                          print('issaved: ${widget.isSave}');
+                          print(_chungKhoanAppProvider.coPhieuSelected);
                  
-              
-
-                  
-                )
+                          
+                        }, 
+                        style: ElevatedButton.styleFrom(
+                          
+                        ),                   
+                      icon: Icon(Icons.star,
+                      color:  (widget.isSave ==1)?const Color.fromARGB(255, 225, 182, 30): Colors.grey ,
+                       
+                        
+                      )
+                 
+                 );
+                 } 
+               )
                 ]
               ),
               

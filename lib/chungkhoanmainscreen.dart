@@ -229,47 +229,58 @@ class _chungkhoanScreenState extends State<ChungKhoanScreen> {
                     ),
 
                     // chon danh muc
-                    ElevatedButton(
-                      onPressed: () {
-                        showButtonSheet(context);
-                        // showModalBottomSheet(
-                        //     context: context,
-                        //     // an navigation
-                        //     useRootNavigator: true,
-                        //     backgroundColor:
-                        //         const Color.fromARGB(255, 255, 255, 255),
-                        //     shape: const RoundedRectangleBorder(
-                        //         borderRadius: BorderRadius.vertical(
-                        //       top: Radius.circular(20),
-                        //     )),
-                        //     builder: (context) => builderSheet());
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.only(
-                            left: 12, top: 12, bottom: 12, right: 8),
-                        fixedSize: const Size.fromHeight(32),
-                        backgroundColor: const Color.fromRGBO(40, 60, 145, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
+                    Selector<ChungKhoanAppProvider, String>(
+                      selector: (_,p1)=> p1.danhmucText,
+                      shouldRebuild: (p,n)=> true,
+                      builder: (context, danhMucText, child){
+                        if(appManager.danhmucText==''){
+                           appManager.setDanhMucText('Danh Muc Yeu Thich');
+                        }
+                        return ElevatedButton(
+                            onPressed: () {
+                              
+                            showButtonSheet(context);
+                          // showModalBottomSheet(
+                          //     context: context,
+                          //     // an navigation
+                          //     useRootNavigator: true,
+                          //     backgroundColor:
+                          //         const Color.fromARGB(255, 255, 255, 255),
+                          //     shape: const RoundedRectangleBorder(
+                          //         borderRadius: BorderRadius.vertical(
+                          //       top: Radius.circular(20),
+                          //     )),
+                          //     builder: (context) => builderSheet());
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.only(
+                              left: 12, top: 12, bottom: 12, right: 8),
+                          fixedSize: const Size.fromHeight(32),
+                          backgroundColor: const Color.fromRGBO(40, 60, 145, 1),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4),
+                          ),
                         ),
-                      ),
-                      child: const Row(
-                        children: [
-                          Text(
-                            "Danh Muc Yeu Thich",
-                            style: TextStyle(
-                              color: Colors.white,
+                        child:  Row(
+                          children: [
+                            Text(
+                              appManager.danhmucText.toLowerCase(),
+                              style:const  TextStyle(
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 4),
-                            child: Icon(
-                              Icons.keyboard_arrow_down,
-                              color: Colors.white,
+                            const Padding(
+                              padding: EdgeInsets.only(left: 4),
+                              child: Icon(
+                                Icons.keyboard_arrow_down,
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
+                      );
+                      },
+                      
                     ),
                     const SizedBox(
                       width: 8,
